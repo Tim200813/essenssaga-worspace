@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anime-Projekt</title>
   <style>
     /* Allgemeines Layout */
@@ -10,6 +10,9 @@
 body {
   background: url('https://pbs.twimg.com/media/Fwoh_AvXwAE2Jew?format=jpg&name=large') repeat; /* Pergament-Hintergrund */
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: 'Cinzel', serif; /* Fantasy-Schriftart */
   color: #2e1a0f;
   margin: 0;
@@ -224,7 +227,7 @@ button:hover, .fancy-btn:hover {
 }
 
 .modal {
-  display: none;
+  display: none ;
   position: fixed;
   z-index: 1000;
   left: 0; 
@@ -248,7 +251,7 @@ button:hover, .fancy-btn:hover {
   padding: 30px 40px;
   border: 3px solid #b28b60;
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   border-radius: 20px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
   font-family: 'Georgia', serif;
@@ -322,6 +325,116 @@ button:hover, .fancy-btn:hover {
     transform: scale(1.05);
   }
 
+
+  @media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+
+  nav button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  .character {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .character img {
+    margin: 0 0 15px 0;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .character-info {
+    max-width: 100%;
+  }
+
+  textarea, input[type="text"] {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .notification {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+
+  nav button {
+    width: 90%;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  section {
+    padding: 20px;
+    margin: 15px auto;
+  }
+
+  .character {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .character img {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 0 15px 0;
+  }
+
+  .character-info {
+    max-width: 100%;
+  }
+
+  .modal-content input,
+  .modal-content textarea {
+    font-size: 1rem;
+  }
+
+  textarea, input[type="text"] {
+    font-size: 1rem;
+  }
+}
+
+#editEpisodeStory {
+  width: 100%;
+  min-height: 1400px;
+  max-height: 1800px;
+  overflow-y: auto;
+  resize: none; /* optional: verhindert manuelles Verziehen */
+}
+
+
+#editCharacterBiography {
+  width: 100%;
+  min-height: 1000px;
+  max-height: 800px;
+  overflow-y: auto;
+  resize: none; /* optional: verhindert manuelles Verziehen */
+}
 
 </style>
 </head>
@@ -760,7 +873,12 @@ function closeEditCharacterModal() {
 
   //
 
-  
+   // Sicherheitshalber alle Modals beim Start ausblenden
+   window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.style.display = 'none';
+    });
+  });
 
   //
 
