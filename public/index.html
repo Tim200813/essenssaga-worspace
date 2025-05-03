@@ -421,11 +421,12 @@ button:hover, .fancy-btn:hover {
 
 #editEpisodeStory {
   width: 100%;
-  min-height: 1400px;
-  max-height: 1800px;
+  min-height: 200px;
+  max-height: 80vh; /* maximal 60% der Bildschirmhöhe */
   overflow-y: auto;
-  resize: none; /* optional: verhindert manuelles Verziehen */
+  resize: none; /* optional: kein manuelles Ziehen */
 }
+
 
 
 #editCharacterBiography {
@@ -642,6 +643,22 @@ button:hover, .fancy-btn:hover {
 
       document.getElementById('editEpisodeName').value = name;
       document.getElementById('editEpisodeStory').value = story;
+
+    //anpassen
+    const storyField = document.getElementById('editEpisodeStory');
+  
+    // Event Listener hinzufügen
+    storyField.addEventListener('input', () => {
+      storyField.style.height = 'auto';
+
+      // berechne max mögliche Höhe (z. B. 60% der Viewport-Höhe)
+      const maxHeight = window.innerHeight * 0.6;
+
+      // setze die Höhe je nach Inhalt, aber nicht größer als maxHeight
+      storyField.style.height = Math.min(storyField.scrollHeight, maxHeight) + 'px';
+    });
+
+
       document.getElementById('editModal').style.display = 'block';
     }
 
