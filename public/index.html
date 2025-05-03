@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Anime-Projekt</title>
+  <style>
+    /* Allgemeines Layout */
+    /* Allgemeines Layout */
+/* Allgemeines Layout */
+body {
+  background: url('https://pbs.twimg.com/media/Fwoh_AvXwAE2Jew?format=jpg&name=large') repeat; /* Pergament-Hintergrund */
+  background-attachment: fixed;
+  font-family: 'Cinzel', serif; /* Fantasy-Schriftart */
+  color: #2e1a0f;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+
+
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 30px;
+  color: #512e1c;
+  text-shadow: 1px 1px 2px #000;
+}
+
+nav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+nav button {
+  background: linear-gradient(145deg, #a17855, #d0a373);
+  color: white;
+  border: 3px solid #5c3c26;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-family: 'Cinzel', serif;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #3d2b1f;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  background: linear-gradient(145deg, #d0a373, #a17855);
+  transform: scale(1.05);
+}
+
+section {
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(255, 248, 230, 0.95);
+  margin: 30px auto;
+  padding: 30px;
+  border: 5px solid #9e7753;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+textarea, input[type="text"] {
+  width: 100%;
+  background-color: #fffaf0;
+  border: 2px solid #aa8c6f;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  box-shadow: inset 2px 2px 6px #ccc;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  border-color: #d89d6a;
+  background-color: #fffbe8;
+}
+
+.episode {
+  background-color: #fffaf3;
+  border: 3px solid #b28b60;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.episode h4 {
+  font-size: 1.4rem;
+  color: #5c3c26;
+  margin-bottom: 10px;
+}
+
+.episode p {
+  white-space: pre-line;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+  color: #3b2b1b;
+}
+
+/* Verbesserte Buttons */
+button, .action {
+  transition: all 0.3s ease;
+}
+
+button.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.error {
+  background-color: #d32f2f;
+  color: white;
+}
+
+button.success:hover {
+  background-color: #66bb6a;
+}
+
+button.error:hover {
+  background-color: #e57373;
+}
+
+
+/* Funktionale Button-Farben im Stil */
+button.save {
+  background: linear-gradient(145deg, #5d8a50, #79b36b);
+  border: 3px solid #3e5f38;
+}
+
+button.save:hover {
+  background: linear-gradient(145deg, #79b36b, #5d8a50);
+}
+
+button.delete {
+  background: linear-gradient(145deg, #c94f4f, #e57373);
+  border: 3px solid #892323;
+}
+
+button.delete:hover {
+  background: linear-gradient(145deg, #e57373, #c94f4f);
+}
+
+button.edit {
+  background: linear-gradient(145deg, #4f83c9, #73a3e7);
+  border: 3px solid #2a4a82;
+}
+
+button.edit:hover {
+  background: linear-gradient(145deg, #73a3e7, #4f83c9);
+}
+
+
+/* Klassischer Fantasy-Button */
+button, .fancy-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  margin: 8px;
+  border: 3px solid #5c3c26;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #e3c9a0, #c49b6e);
+  color: #2e1a0f;
+  text-shadow: 0 1px 1px #fffaf0;
+  box-shadow: inset 0 0 4px #fff, 2px 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover, .fancy-btn:hover {
+  background: linear-gradient(to bottom, #f2d6a3, #b9834f);
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 5px #fff8e1, 2px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  min-width: 300px;
+  max-width: 600px;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+/* Farben je nach Typ */
+.notification.info {
+  background-color: #fff3cd;
+  border-left: 6px solid #ffbf00;
+  color: #856404;
+}
+
+.notification.success {
+  background-color: #d4edda;
+  border-left: 6px solid #28a745;
+  color: #155724;
+}
+
+.notification.error {
+  background-color: #f8d7da;
+  border-left: 6px solid #dc3545;
+  color: #721c24;
+}
+
+
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; 
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modal-content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff8ef;
+  padding: 30px 40px;
+  border: 3px solid #b28b60;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  font-family: 'Georgia', serif;
+}
+
+
+.modal .close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-content input,
+.modal-content textarea {
+  margin-bottom: 15px;
+}
+
+
+.character {
+    display: flex;
+    align-items: flex-start;
+    background-color: #fffaf3;
+    border: 3px solid #b28b60;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .character img {
+    width: 150px; /* Größeres Bild */
+    height: auto;
+    margin-right: 20px; /* Abstand zum Text */
+  }
+
+  .character-info {
+    max-width: 600px;
+  }
+
+  .character h4 {
+    font-size: 1.6rem;
+    color: #5c3c26;
+    margin-bottom: 10px;
+  }
+
+  .character p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #3b2b1b;
+  }
+
+  .character button {
+    background: linear-gradient(145deg, #a17855, #d0a373);
+    color: white;
+    border: 3px solid #5c3c26;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Cinzel', serif;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #3d2b1f;
+    transition: all 0.3s ease;
+  }
+
+  .character button:hover {
+    background: linear-gradient(145deg, #d0a373, #a17855);
+    transform: scale(1.05);
+  }
+
+
+</style>
+</head>
+<body>
+
+  <h1>Anime-Projekt Webseite</h1>
+
+  <nav>
+    <button onclick="showSection('author')">Autorenbereich</button>
+    <button onclick="showSection('characters')">Charaktere</button>
+  </nav>
+
+  <section id="author" class="hidden">
+    <h2>Autorenbereich</h2>
+    <button onclick="toggleSeason()">Season 1</button>
+    <div id="season1" class="hidden">
+      <h3>Neue Episode hinzufügen</h3>
+      <input type="text" id="newEpisodeName" placeholder="z. B. Episode 1">
+      <textarea id="newEpisodeStory" placeholder="Storytext hier eingeben..."></textarea>
+      <button onclick="addEpisode()">Episode speichern</button>
+
+      <h3>Gespeicherte Episoden</h3>
+      <input type="text" id="searchInput" placeholder="Nach Episodentitel suchen..." oninput="filterEpisodes()">
+      <div id="episodesContainer" class="episodes-container"></div>
+    </div>
+    
+  </section>
+
+  <section id="characters" class="hidden">
+    <h2>Charaktere</h2>
+  
+    <!-- Formular zur Eingabe eines neuen Charakters -->
+    <div>
+      <h3>Neuen Charakter hinzufügen</h3>
+      <input type="text" id="characterName" placeholder="Name des Charakters">
+      <input type="text" id="characterAge" placeholder="Alter des Charakters">
+      <input type="text" id="characterStrength" placeholder="Stärke des Charakters">
+      <textarea id="characterBiography" placeholder="Biografie des Charakters"></textarea>
+      <textarea id="characterTraits" placeholder="Eigenschaften des Charakters"></textarea>
+      <input type="text" id="characterRelationships" placeholder="Beziehungen des Charakters">
+      <input type="text" id="characterMusic" placeholder="Musik des Charakters">
+      <input type="text" id="art_link" placeholder="Art Bereich Link" />
+      <input type="text" id="characterImageURL" placeholder="Bild URL des Charakters">
+      <button class="save" onclick="addCharacter()">Charakter speichern</button>
+    </div>
+  
+    <!-- Suchfunktion -->
+    <h3>Charaktere suchen</h3>
+    <input type="text" id="searchCharacter" placeholder="Nach Charakteren suchen..." oninput="searchCharacter()">
+
+  <!-- Modal für das Bearbeiten eines Charakters -->
+<div id="editCharacterModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditCharacterModal()">&times;</span>
+    <h3>Charakter bearbeiten</h3>
+    <input type="text" id="editCharacterName" placeholder="Name des Charakters">
+    <input type="text" id="editCharacterAge" placeholder="Alter des Charakters">
+    <input type="text" id="editCharacterStrength" placeholder="Stärke des Charakters">
+    <textarea id="editCharacterBiography" placeholder="Biografie des Charakters"></textarea>
+    <textarea id="editCharacterTraits" placeholder="Eigenschaften des Charakters"></textarea>
+    <input type="text" id="editCharacterRelationships" placeholder="Beziehungen des Charakters">
+    <input type="text" id="editCharacterMusic" placeholder="Musik des Charakters">
+    <input type="text" id="editCharacterImageURL" placeholder="Bild URL des Charakters">
+    <button class="save" onclick="saveEditedCharacter()">Charakter speichern</button>
+  </div>
+</div>
+
+
+    
+    <!-- Anzeige der Charaktere -->
+    <div id="charactersList" class="characters-container"></div>
+  </section>
+
+  <!-- Benutzerdefinierte Benachrichtigungen -->
+  <div id="notification" class="notification"></div>
+
+  <!-- Modal für das Bearbeiten einer Episode -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Episode bearbeiten</h3>
+    <input type="text" id="editEpisodeName" placeholder="Titel der Episode">
+    <textarea id="editEpisodeStory" placeholder="Storytext der Episode"></textarea>
+    <button class="save" onclick="saveEditedEpisode()">Speichern</button>
+  </div>
+</div>
+
+
+  <!-- Modal für das Bearbeiten eines Charakters -->
+
+
+  <script>
+    let currentEditingEpisodeId = null;;
+    let currentEditingCharacterId = null;
+    
+
+    
+
+    // Navigation
+    function showSection(id) {
+  document.getElementById('author').classList.add('hidden');
+  document.getElementById('characters').classList.add('hidden');
+  document.getElementById(id).classList.remove('hidden');
+
+  if (id === 'characters') loadCharacters();
+  if (id === 'author') loadEpisodes();
+}
+
+
+    function toggleSeason() {
+      const el = document.getElementById('season1');
+      el.classList.toggle('hidden');
+    }
+
+    // Benachrichtigung anzeigen
+    function showNotification(message, type = 'info') {
+      const notification = document.getElementById('notification');
+      notification.innerText = message;
+      notification.classList.add(type);
+      notification.style.display = 'block';
+      
+      setTimeout(() => {
+        notification.style.display = 'none';
+        notification.classList.remove(type);
+      }, 3000); // Versteckt die Benachrichtigung nach 3 Sekunden
+    }
+    
+    //Suchfunktion
+    function filterEpisodes() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const episodes = document.querySelectorAll('.episode');
+
+      episodes.forEach(ep => {
+        const title = ep.querySelector('h4').innerText.toLowerCase();
+        if (title.includes(query)) {
+          ep.style.display = '';
+        } else {
+          ep.style.display = 'none';
+        }
+      });
+    }
+
+
+    // Episode speichern
+    async function addEpisode() {
+      const name = document.getElementById('newEpisodeName').value.trim();
+      const story = document.getElementById('newEpisodeStory').value.trim();
+
+      if (!name || !story) return showNotification("Bitte Titel und Story eingeben!", "error");
+
+      // Überprüfen, ob der Titel bereits existiert
+      const responseCheck = await fetch('/episodes');
+      const existingEpisodes = await responseCheck.json();
+      const titleExists = existingEpisodes.some(ep => ep.name.toLowerCase() === name.toLowerCase());
+
+      if (titleExists) {
+        return showNotification("Ein Titel mit diesem Namen existiert bereits!", "error");
+      }
+
+      // Daten an den Server senden
+      const response = await fetch('/episodes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, story })
+      });
+
+      if (response.ok) {
+        showNotification('Episode gespeichert!', 'success');
+        document.getElementById('newEpisodeName').value = '';
+        document.getElementById('newEpisodeStory').value = '';
+        loadEpisodes();
+      } else {
+        showNotification('Fehler beim Speichern der Episode!', 'error');
+      }
+    }
+
+
+    // Episoden laden
+    async function loadEpisodes() {
+      const container = document.getElementById('episodesContainer');
+      container.innerHTML = ''; // leeren
+      const response = await fetch('/episodes');
+      const episodes = await response.json();
+
+      episodes.forEach(ep => {
+        const div = document.createElement('div');
+        div.classList.add('episode');
+        div.id = ep.id;
+        div.innerHTML = `
+          <h4>${ep.name}</h4>
+          <p>${ep.story}</p>
+          <button onclick="openEditModal('${ep.id}')">Bearbeiten</button>
+          <button class="delete" onclick="deleteEpisode('${ep.id}')">Löschen</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Bearbeiten Modal öffnen
+    function openEditModal(id) {
+      currentEditingEpisodeId = id;
+      const episode = document.getElementById(id);
+      const name = episode.querySelector('h4').innerText;
+      const story = episode.querySelector('p').innerText;
+
+      document.getElementById('editEpisodeName').value = name;
+      document.getElementById('editEpisodeStory').value = story;
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    // Bearbeiten Modal schließen
+    function closeModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Bearbeitet speichern
+    async function saveEditedEpisode() {
+      const name = document.getElementById('editEpisodeName').value.trim();
+      const story = document.getElementById('editEpisodeStory').value.trim();
+
+      if (!name || !story) return showNotification("Bitte Titel und Story eingeben!", "error");
+
+      const response = await fetch(`/episodes/${currentEditingEpisodeId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, story })
+      });
+
+      if (response.ok) {
+        showNotification('Episode aktualisiert!', 'success');
+        loadEpisodes(); // neu laden
+        closeModal(); // Modal schließen
+      } else {
+        showNotification('Fehler beim Aktualisieren der Episode!', 'error');
+      }
+    }
+
+    // Löschen einer Episode
+    async function deleteEpisode(id) {
+      const response = await fetch(`/episodes/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        showNotification('Episode gelöscht!', 'success');
+        loadEpisodes(); // neu laden
+      } else {
+        showNotification('Fehler beim Löschen der Episode!', 'error');
+      }
+    }
+
+    async function loadCharacters() {
+  const container = document.getElementById('charactersList');
+  container.innerHTML = ''; // Leeren des Containers
+  const response = await fetch('/characters');
+  const characters = await response.json();
+
+  if (characters.length === 0) {
+    container.innerHTML = '<p>Keine Charaktere gefunden.</p>';
+    return;
+  }
+
+  characters.forEach(char => {
+    const div = document.createElement('div');
+    div.classList.add('character');
+    div.id = char.id;
+
+    div.innerHTML = `
+      <img src="${char.image_url}" alt="${char.name}">
+      <div class="character-info">
+        <h4>${char.name}</h4>
+        <p><strong>Alter:</strong> ${char.age || '–'}</p>
+        <p><strong>Stärke:</strong> ${char.strength || '–'}</p>
+        <p><strong>Biografie:</strong> ${char.biography || '–'}</p>
+        <p><strong>Eigenschaften:</strong> ${char.traits || '–'}</p>
+        <p><strong>Beziehungen:</strong> ${char.relationships || '–'}</p>
+        <p><strong>Musik:</strong> ${char.music || '–'}</p>
+        ${char.art_link ? `<button onclick="window.open('${char.art_link}', '_blank')">Art Bereich ansehen</button>` : ''}
+        <button class="edit" onclick="openEditCharacterModal('${char.id}')">Bearbeiten</button>
+        <button class="delete" onclick="deleteCharacter('${char.id}')">Löschen</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+
+
+
+
+    // Neuen Charakter speichern
+  async function addCharacter() {
+    const name = document.getElementById('characterName').value.trim();
+    const age = document.getElementById('characterAge').value.trim();
+    const strength = document.getElementById('characterStrength').value.trim();
+    const biography = document.getElementById('characterBiography').value.trim();
+    const traits = document.getElementById('characterTraits').value.trim();
+    const relationships = document.getElementById('characterRelationships').value.trim();
+    const music = document.getElementById('characterMusic').value.trim();
+    const artLink = document.getElementById('art_link').value.trim();
+    const imageURL = document.getElementById('characterImageURL').value.trim();
+
+    if (!name) {
+      return showNotification("Bitte mindestens den Namen des Charakters eingeben!", "error");
+    }
+
+
+    // Daten an Supabase senden
+    const response = await fetch('/characters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, age, strength, biography, traits, relationships, music, art_link: artLink, image_url: imageURL
+      })
+    });
+
+    if (response.ok) {
+      showNotification('Charakter gespeichert!', 'success');
+      loadCharacters();  // Charaktere neu laden
+      clearCharacterForm();  // Formular zurücksetzen
+    } else {
+      showNotification('Fehler beim Speichern des Charakters!', 'error');
+    }
+  }
+
+  // Suchfunktion
+  function searchCharacter() {
+    const query = document.getElementById('searchCharacter').value.toLowerCase();
+    const characters = document.querySelectorAll('.character');
+
+    characters.forEach(char => {
+      const name = char.querySelector('h4').innerText.toLowerCase();
+      if (name.includes(query)) {
+        char.style.display = '';
+      } else {
+        char.style.display = 'none';
+      }
+    });
+  }
+
+  //Bearbeiten
+
+function openEditCharacterModal(id) {
+  currentEditingCharacterId = id;
+  const character = document.getElementById(id);
+
+  document.getElementById('editCharacterName').value = character.querySelector('h4').innerText;
+  document.getElementById('editCharacterAge').value = character.querySelector('p:nth-of-type(1)').innerText.replace("Alter: ", "");
+  document.getElementById('editCharacterStrength').value = character.querySelector('p:nth-of-type(2)').innerText.replace("Stärke: ", "");
+  document.getElementById('editCharacterBiography').value = character.querySelector('p:nth-of-type(3)').innerText.replace("Biografie: ", "");
+  document.getElementById('editCharacterTraits').value = character.querySelector('p:nth-of-type(4)').innerText.replace("Eigenschaften: ", "");
+  document.getElementById('editCharacterRelationships').value = character.querySelector('p:nth-of-type(5)').innerText.replace("Beziehungen: ", "");
+  document.getElementById('editCharacterMusic').value = character.querySelector('p:nth-of-type(6)').innerText.replace("Musik: ", "");
+  document.getElementById('editCharacterImageURL').value = character.querySelector('img')?.src || "";
+
+  document.getElementById('editCharacterModal').style.display = 'block';
+}
+
+async function saveEditedCharacter() {
+  const name = document.getElementById('editCharacterName').value.trim();
+  const age = document.getElementById('editCharacterAge').value.trim();
+  const strength = document.getElementById('editCharacterStrength').value.trim();
+  const biography = document.getElementById('editCharacterBiography').value.trim();
+  const traits = document.getElementById('editCharacterTraits').value.trim();
+  const relationships = document.getElementById('editCharacterRelationships').value.trim();
+  const music = document.getElementById('editCharacterMusic').value.trim();
+  const image_url = document.getElementById('editCharacterImageURL').value.trim();
+
+  if (!name) {
+    return showNotification("Der Name darf nicht leer sein!", "error");
+  }
+
+  const response = await fetch(`/characters/${currentEditingCharacterId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, age, strength, biography, traits, relationships, music, image_url })
+  });
+
+  if (response.ok) {
+    showNotification("Charakter aktualisiert!", "success");
+    document.getElementById('editCharacterModal').style.display = 'none';
+    loadCharacters(); // Liste neu laden
+  } else {
+    showNotification("Fehler beim Aktualisieren!", "error");
+  }
+}
+
+function closeEditCharacterModal() {
+  document.getElementById('editCharacterModal').style.display = 'none';
+}
+
+
+
+
+  // Charakter löschen
+  async function deleteCharacter(id) {
+    const response = await fetch(`/characters/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (response.ok) {
+      showNotification('Charakter gelöscht!', 'success');
+      loadCharacters();  // neu laden
+    } else {
+      showNotification('Fehler beim Löschen des Charakters!', 'error');
+    }
+  }
+
+  // Benutzerdefinierte Benachrichtigungen
+  function showNotification(message, type = 'info') {
+    const notification = document.getElementById('notification');
+    notification.innerText = message;
+    notification.classList.add(type);
+    notification.style.display = 'block';
+    setTimeout(() => {
+      notification.style.display = 'none';
+      notification.classList.remove(type);
+    }, 3000);
+  }
+
+  // Formular zurücksetzen
+  function clearCharacterForm() {
+    document.getElementById('characterName').value = '';
+    document.getElementById('characterAge').value = '';
+    document.getElementById('characterStrength').value = '';
+    document.getElementById('characterBiography').value = '';
+    document.getElementById('characterTraits').value = '';
+    document.getElementById('characterRelationships').value = '';
+    document.getElementById('characterMusic').value = '';
+    document.getElementById('characterArtLink').value = '';
+    document.getElementById('characterImageURL').value = '';
+  }
+
+
+  //
+
+  
+
+  //
+
+
+    // Beim Laden der Seite alle Episoden laden
+    window.onload = loadEpisodes;
+  </script>
+</body>
+</html>
+
